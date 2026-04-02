@@ -1,6 +1,5 @@
 Here you go - **all 3 resources**, crafted for professional deployment in a modern lakehouse setup using Azure Storage with hierarchical namespace (ADLS Gen2):
 
----
 
 ## **Automation Script to Create Container (Filesystem)**
 
@@ -25,5 +24,3 @@ az storage container create \
 > ⚠️ Requires that you're logged in with az login or using a Service Principal with sufficient RBAC.
 
 If you want ARM or Bicep template as a JSON/YAML file, I can provide that too.
-
----
