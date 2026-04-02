@@ -145,7 +145,6 @@ It validates the entire data flow from source to consumption and ensures the dat
     - In the Power BI report builder, drag a **Card** visual onto the canvas and add the primary key (e.g., `CustomerID`) to the field well. Change the summarization to **Count**.
     - This card should display the same total row count you found using SQL or Spark. You can also add a **Table** visual to browse the data.
 
----
 
 ### Summary: Which Method Should You Use?
 
