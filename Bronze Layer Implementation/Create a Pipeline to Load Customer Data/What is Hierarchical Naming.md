@@ -1,6 +1,5 @@
 If you have **not enabled Hierarchical Namespace**, then your storage account is **not a true Azure Data Lake Storage Gen2 account** — it is just a **Blob Storage account**, even if you try to use the `dfs.core.windows.net` endpoint.
 
----
 
 ## ❌ Consequences of Not Enabling Hierarchical Namespace
 
@@ -12,7 +11,6 @@ If you have **not enabled Hierarchical Namespace**, then your storage account is
 |`abfss://` Spark paths|❌ Won’t work|✅ Required|
 |Azure Synapse, Fabric, Power BI (lake)|Limited / ❌|✅ Full integration|
 
----
 
 ## ✅ What You Can Do Now
 
@@ -32,7 +30,6 @@ This is the **only** way to start using ADLS Gen2 features.
 
 ⚠️ **This setting is immutable.** You cannot enable HNS on an existing storage account.
 
----
 
 ### Option 2: Use It as Blob Storage Only
 
@@ -51,7 +48,6 @@ But note:
 
 > You cannot use this with Spark, Power BI Dataflows, Synapse, or Fabric as a Data Lake — those require HNS.
 
----
 
 ## ✅ Recommendation
 
@@ -65,6 +61,5 @@ Then you **must**:
 
 > 🎯 Create a new ADLS Gen2 account with HNS enabled
 
----
 
 Would you like a deployment script to create such an account with best-practice naming and tiering? I can generate one using ARM, Bicep, or CLI.
