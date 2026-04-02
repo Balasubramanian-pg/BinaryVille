@@ -2,7 +2,6 @@
 
 In **ADLS Gen2**, a **filesystem** is the **top-level container** for your data — similar to a **container** in Blob Storage.
 
----
 
 ### 🔁 Mapping: Blob Storage vs. ADLS Gen2
 
@@ -16,7 +15,6 @@ So if you're used to Blob Storage, just remember:
 
 > Container = Filesystem in ADLS Gen2.
 
----
 
 ### 📌 Where to Find Filesystem Name
 
@@ -26,7 +24,6 @@ You can get it in the Azure portal:
 2. Go to **Containers** (same UI, but behind the scenes they behave as filesystems when Hierarchical Namespace is ON)
 3. The name you see in the list (e.g., `rawdata`, `financefiles`, etc.) is your **filesystem name**
 
----
 
 ### ✅ Example URI Using Filesystem
 
@@ -48,6 +45,5 @@ Or in **Spark/Power BI**:
 abfss://rawdata@mystorageaccount.dfs.core.windows.net/sales/2024/data.csv
 ```
 
----
 
 If you tell me your storage account name and container name, I’ll format the exact `dfs.core` and `abfss://` URL for you.
