@@ -9,7 +9,6 @@ Clean product data is the backbone of e-commerce analytics, supply chain managem
 - **Business Enrichment:** We create new, high-value attributes that don't exist in the source system. `price_category` and `stock_status` provide immediate analytical value for merchandising and inventory management.
 - **Idempotent and Incremental:** Just like our customer notebook, this process is designed to be efficient and reliable, only processing new data and safely handling re-runs.
 
----
 
 ### Step-by-Step Guide with Detailed Explanations
 
@@ -18,7 +17,6 @@ Clean product data is the backbone of e-commerce analytics, supply chain managem
 - A **Bronze Lakehouse** (e.g., `LH_Bronze`) containing the raw `product` table. This table must have an `ingestion_timestamp` column.
 - An existing **Silver Lakehouse** (e.g., `LH_Silver`).
 
----
 
 ### Step 1, 2, & 3: Navigate and Create the Notebook
 
@@ -28,7 +26,6 @@ Clean product data is the backbone of e-commerce analytics, supply chain managem
     - Click **Open notebook > New notebook**.
     - Name it descriptively: `Ntbk_Bronze_to_Silver_Products`.
 
----
 
 ### Notebook Implementation: A Cell-by-Cell Breakdown
 
@@ -65,7 +62,6 @@ spark.sql("""
     - `last_updated`: This audit column is essential for our incremental loading strategy.
 - `**USING DELTA**`: We explicitly create a Delta Lake table to leverage its transactional capabilities, especially the `MERGE` command.
 
----
 
 ### Cell 2: Get the Last Processed Timestamp for Incremental Loading
 
@@ -93,7 +89,6 @@ print(f"Processing product data ingested after: {last_processed_timestamp}")
 - `**try...except**` **Block**: This is a more robust way to handle the "first run" scenario. The `spark.sql` command could fail if the table doesn't exist (though our first cell prevents this), or `last_processed_df.collect()` could fail if the DataFrame is empty. This structure gracefully catches any error and defaults to the historical timestamp, making the script more resilient.
 - **Logic**: The logic is identical to the customer notebook: find the maximum `last_updated` value from the target table. If it's not found, use a very old date to ensure all data is processed.
 
----
 
 ### Cell 3: Load New Data from the Bronze Layer
 
@@ -114,7 +109,6 @@ incremental_bronze_df.createOrReplaceTempView("bronze_incremental_products_view"
 
 - This cell mirrors the logic from our customer notebook. We read the source Bronze table, apply a filter to isolate only the new records based on our high-water mark, and create a temporary view. This temporary view (`bronze_incremental_products_view`) now represents the batch of data we need to clean and transform.
 
----
 
 ### Cell 4: Apply Transformations and Data Quality Rules
 
@@ -205,7 +199,6 @@ silver_incremental_df.createOrReplaceTempView("silver_incremental_products_upser
     This CTE approach first cleans the data in the `CleansedData` block and then applies the enrichment on the already clean columns in the final `SELECT` statement. It's much easier to debug and understand.
     
 
----
 
 ### Cell 5: Merge Data into the Silver Layer (Upsert)
 
@@ -231,7 +224,6 @@ spark.sql("""
 
 - The `MERGE` command works exactly as before. It uses the `product_id` as the unique key to determine whether to perform an `UPDATE` (for existing products) or an `INSERT` (for new products). This single, atomic operation prevents partial writes and ensures data consistency.
 
----
 
 ### Cell 6: Verify and Conclude
 
