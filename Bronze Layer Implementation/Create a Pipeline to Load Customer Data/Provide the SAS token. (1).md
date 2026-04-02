@@ -4,7 +4,6 @@ You can generate the **SAS (Shared Access Signature) token** from the **Azure Po
 - A **container/filesystem**,
 - Or a **specific file/folder**.
 
----
 
 ## ✅ How to Generate a SAS Token for ADLS Gen2 (via Azure Portal)
 
@@ -29,7 +28,6 @@ You can generate the **SAS (Shared Access Signature) token** from the **Azure Po
 5. Click **Generate SAS and connection string**
 6. Copy the **SAS token** (just the query string, starting with `?sv=...`)
 
----
 
 ### 📌 Optional: SAS for a Container / Filesystem Level
 
@@ -39,7 +37,6 @@ You can generate the **SAS (Shared Access Signature) token** from the **Azure Po
 4. Click on **Generate SAS** (button at the top bar)
 5. Select permissions → Generate
 
----
 
 ## 🔐 Example Usage
 
@@ -67,13 +64,11 @@ Or for Spark:
 abfss://landing@balasubramanian.dfs.core.windows.net/<path>?<sas_token>
 ```
 
----
 
 ## ❗Security Tip
 
 - **Never hardcode** your SAS token in public code.
 - Always **set minimal permissions** and **short expiry** where possible.
 
----
 
 Let me know if you’re using **Python**, **Power BI**, or **Spark**, and I’ll show you exactly how to pass the token.
