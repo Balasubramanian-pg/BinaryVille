@@ -23,7 +23,6 @@ Ensure you have the following resources and permissions configured before you be
     - You need a **Member**, **Contributor**, or **Admin** role in the Fabric workspace to create pipelines and write to the Lakehouse.
     - You need permissions to read from the ADLS Gen2 account. The easiest way to get started is with a **SAS (Shared Access Signature) token**. For production, a Service Principal is recommended.
 
----
 
 ### Step-by-Step Pipeline Creation
 
