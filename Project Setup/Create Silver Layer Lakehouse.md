@@ -19,14 +19,12 @@ Think of it like this:
 
 In this section, we are simply creating the "mixing bowl" for our Silver data—the Lakehouse itself.
 
----
 
 ### Prerequisites
 
 - An active **Microsoft Fabric Workspace** with an assigned capacity.
 - Appropriate permissions within the workspace (e.g., **Admin**, **Member**, or **Contributor**) to create new artifacts.
 
----
 
 ### Step-by-Step Guide to Creating the Silver Lakehouse
 
