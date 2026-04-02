@@ -18,7 +18,6 @@ Think of it this way:
 3. **High Performance:** The model caches data in memory and uses a highly optimized engine (the same one as Analysis Services) for lightning-fast queries.
 4. **Advanced Analytics with DAX:** You can create sophisticated calculations like Year-over-Year Growth, Moving Averages, and other time-intelligence metrics using the DAX (Data Analysis Expressions) formula language.
 
----
 
 ### Step 1: Prerequisites - The Foundation
 
@@ -27,7 +26,6 @@ Before you begin, ensure your Gold Lakehouse (`LH_Gold`) is ready and contains t
 - `gold_daily_sales`
 - `gold_category_sales`
 
----
 
 ### Step 2: Create the Semantic Model Shell
 
@@ -43,7 +41,6 @@ This is the initial creation process, which sets up the container for our model.
 
 Fabric will create the semantic model and take you to the modeling view. **The real work starts now.**
 
----
 
 ### Step 3: The Core Work - Defining the Model Logic
 
@@ -127,7 +124,6 @@ _While this seems redundant, it provides a consistent naming convention (`Total 
 1. **Formatting:** Select the `[Total Sales]` measure, go to the Measure tools ribbon, and change the format to **Currency**. Do the same for other monetary measures.
 2. **Hiding Columns:** Right-click on the `daily_total_sales` column in the `gold_daily_sales` table and select **Hide**. We want users to use our `[Total Sales]` measure, not the raw column, to ensure consistency.
 
----
 
 ### Step 4: Verify and Consume the Model
 
