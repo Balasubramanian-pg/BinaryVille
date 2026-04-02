@@ -157,5 +157,3 @@ else you will run into this error
 3.3 On the top select the run tab and run the pipeline.
 
 - Pipeline executed successfully and load the data in bronzelayer lakehouse.
-
----
