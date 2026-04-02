@@ -32,5 +32,3 @@ df.show()
 ```Python
 df.write.mode("overwrite").parquet("abfss://landing@ouff.dfs.core.windows.net/processed/hotels")
 ```
-
----
