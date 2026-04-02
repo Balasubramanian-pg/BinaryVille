@@ -10,14 +10,12 @@ The Gold layer is designed for speed, simplicity, and direct business consumptio
 
 This notebook takes our granular Silver data and "rolls it up" into a powerful, business-ready summary.
 
----
 
 ### Prerequisites
 
 - An existing **Silver Lakehouse** (`LH_Silver`) containing the clean `silver_orders` table.
 - An existing **Gold Lakehouse** (`LH_Gold`) to store the final aggregated table.
 
----
 
 ### Step 1, 2, & 3: Navigate and Create the Notebook
 
@@ -27,7 +25,6 @@ This notebook takes our granular Silver data and "rolls it up" into a powerful, 
     - Click **Open notebook > New notebook**.
     - Name it descriptively: `Ntbk_Gold_DailySales_Summary`.
 
----
 
 ### Notebook Implementation
 
@@ -88,7 +85,6 @@ spark.sql("""
 
 - This query reads from our new Gold table and shows the 10 most recent days of sales. This is a perfect quick check to ensure the aggregation worked and the data looks reasonable.
 
----
 
 ### Method 2: Best Practice - An Incremental Approach Using `MERGE`
 
