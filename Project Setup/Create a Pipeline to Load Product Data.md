@@ -8,7 +8,6 @@ Before proceeding, ensure the following dependencies are met:
 - **Bronze Layer Lakehouse**: A **Bronze layer lakehouse** should be pre-created in **Microsoft Fabric**. This lakehouse acts as the designated landing zone for the raw Product data.
 - **Microsoft Fabric Data Factory Access**: You must have the necessary permissions and access to the **Data Factory experience in Microsoft Fabric** to build, configure, and automate data pipelines.
 
----
 
 # Steps to Ingest Product Data
 
