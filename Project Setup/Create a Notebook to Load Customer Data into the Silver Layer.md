@@ -1,6 +1,5 @@
 Moving data from a raw Bronze layer to a clean Silver layer is a foundational process. The provided code is a great start, but let's break it down in detail, explaining not just the _what_, but the _why_ behind every command and concept.
 
----
 
 ## Building a Robust Bronze-to-Silver Transformation Notebook
 
@@ -15,7 +14,6 @@ This notebook is the heart of the "T" (Transform) in our ELT (Extract, Load, Tra
 - **Applying Business Logic:** We enrich the data by adding business-driven context, like the `customer_segment`, which isn't present in the source system.
 - **Efficiency:** By using an incremental loading pattern, we only process new or changed data, saving significant compute costs and time compared to reprocessing the entire dataset every time.
 
----
 
 ### Step-by-Step Guide with Detailed Explanations
 
@@ -24,7 +22,6 @@ This notebook is the heart of the "T" (Transform) in our ELT (Extract, Load, Tra
 - A **Bronze Lakehouse** (e.g., `LH_Bronze`) containing the raw `customer` table. **Crucially, this Bronze table must have a timestamp column (e.g.,** `**ingestion_timestamp**`**) that marks when each row was ingested.**
 - An empty **Silver Lakehouse** (e.g., `LH_Silver`) where the cleaned table will be stored.
 
----
 
 ### Step 1, 2, & 3: Navigate and Create the Notebook
 
@@ -34,7 +31,6 @@ This notebook is the heart of the "T" (Transform) in our ELT (Extract, Load, Tra
     - From within the `LH_Silver` Lakehouse view, click **Open notebook > New notebook**. This automatically attaches the notebook to this Lakehouse, making it easier to read from and write to it.
     - Give it a clear, descriptive name: `Ntbk_Bronze_to_Silver_Customers`.
 
----
 
 ### Notebook Implementation: A Cell-by-Cell Breakdown
 
@@ -75,7 +71,6 @@ spark.sql("""
     - `last_updated`: A crucial auditing column. It will store the timestamp of when a given record was last processed and loaded into the Silver table.
 - `**USING DELTA**`: This explicitly states we are creating a **Delta Lake table**, which gives us ACID transactions, time travel, and the powerful `MERGE` capability we'll use later. In Fabric Lakehouses, Delta is the default, but being explicit is good practice.
 
----
 
 ### Cell 2: Get the Last Processed Timestamp for Incremental Loading
 
@@ -104,7 +99,6 @@ print(f"Processing data ingested after: {last_processed_timestamp}")
     - `['last_processed']`: Accesses the value in that row by its column name.
 - **The "First Run" Problem**: The `if last_processed_timestamp is None:` block is critical. On the very first run, the `silver_customers` table is empty, so `MAX(last_updated)` returns `NULL`. This code handles that by setting the timestamp to a historical date, guaranteeing that all records from the Bronze table will be selected.
 
----
 
 ### Cell 3: Load New Data from the Bronze Layer
 
@@ -127,7 +121,6 @@ incremental_bronze_df.createOrReplaceTempView("bronze_incremental_view")
 - `.filter(f"...")`: This is the core of the incremental logic. It applies a filter to the DataFrame, keeping only the rows where the `ingestion_timestamp` is more recent than our `last_processed_timestamp`.
 - `createOrReplaceTempView("bronze_incremental_view")`: This is a powerful Spark feature. It creates a temporary, session-level "table" named `bronze_incremental_view` that points to our filtered DataFrame (`incremental_bronze_df`). This allows us to use standard SQL in the next step to perform our complex transformations, which is often easier to read and write than the equivalent PySpark DataFrame API code. It does not write any data to storage; it's just a logical pointer.
 
----
 
 ### Cell 4: Apply Transformations and Data Quality Rules
 
@@ -182,7 +175,6 @@ silver_incremental_df.createOrReplaceTempView("silver_incremental_upserts")
     - `total_purchases >= 0`: Removes junk records with negative purchase amounts.
 - `CURRENT_TIMESTAMP() AS last_updated`: We generate a _new_ timestamp for this batch. This value will become the "high-water mark" for the _next_ run.
 
----
 
 ### Cell 5: Merge Data into the Silver Layer (Upsert)
 
@@ -212,7 +204,6 @@ spark.sql("""
 - `**WHEN MATCHED THEN UPDATE SET ***`: If a `customer_id` from the source is found in the target table, this clause is executed. `UPDATE SET *` is a convenient shortcut to update all columns in the target row with the values from the corresponding source row.
 - `**WHEN NOT MATCHED THEN INSERT ***`: If a `customer_id` from the source is _not_ found in the target, it's considered a new customer. This clause inserts the entire new row from the source into the target table.
 
----
 
 ### Cell 6: Verify and Conclude
 
