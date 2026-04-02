@@ -16,7 +16,6 @@ If you're using **Power BI or Fabric Dataflow Gen2**, here’s how to access you
     - Paste only the SAS token (starts with `?sv=...` or just the part after `?`)
 4. You’ll now be able to browse the file system just like folders.
 
----
 
 ## 🔐 Security Best Practices
 
@@ -24,7 +23,6 @@ If you're using **Power BI or Fabric Dataflow Gen2**, here’s how to access you
 - Store the token in **Key Vault**, or use **Managed Identity** for production workloads
 - Rotate SAS tokens regularly (set expiry ≤ 7 days if possible)
 
----
 
 Would you like a fully integrated **deployment template** (e.g., Bicep or ARM) that provisions:
 
