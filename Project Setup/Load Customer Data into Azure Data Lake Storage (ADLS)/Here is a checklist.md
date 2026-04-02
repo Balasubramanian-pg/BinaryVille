@@ -2,7 +2,6 @@ You're on the right track - the screenshot shows you're creating a **Storage Acc
 
 Here’s a **review of the key settings** and additional **recommendations** to ensure your account is optimized for **lakehouse use cases** (e.g., Power BI, Fabric, Synapse, Spark, etc.).
 
----
 
 ## ✅ Mandatory Settings (✔️ You already did it)
 
@@ -15,7 +14,6 @@ Here’s a **review of the key settings** and additional **recommendations** to 
 |**Large file shares**|Enabled|Optional|Not needed for ADLS; harmless|
 |**SFTP**|Disabled|Optional|Enable only if required for external integrations|
 
----
 
 ## 🔍 Recommended Adjustments (Based on Use Case)
 
@@ -25,14 +23,12 @@ Here’s a **review of the key settings** and additional **recommendations** to 
 - **If this is for analytics / dev use**: Switch to **LRS** (Locally redundant) to **reduce cost**
 - If **mission-critical data**: Keep RA-GRS
 
----
 
 ### 2. **Enable Secure Transfer:**
 
 - Go to **Networking → Secure transfer required** → Set to **Enabled**
 - Ensures all communication uses HTTPS (default best practice)
 
----
 
 ### 3. **Firewall and Virtual Networks:**
 
@@ -40,7 +36,6 @@ Here’s a **review of the key settings** and additional **recommendations** to 
 - Set **"Selected networks"** and allow trusted IPs or VNets
 - Else: leave as **"All networks"** for dev/testing
 
----
 
 ### 4. **Tags** (Optional, but best practice)
 
@@ -49,14 +44,12 @@ Here’s a **review of the key settings** and additional **recommendations** to 
     - `owner: yourname`
     - `project: carbonEye` or similar
 
----
 
 ### 5. **Data Protection (Optional)**
 
 - **Blob soft delete: Leave disabled** for ADLS Gen2 compatibility
 - **Versioning / Change feed:** Enable only if required and tested for compatibility
 
----
 
 ## ✅ Summary – Final Checklist
 
@@ -69,7 +62,6 @@ Here’s a **review of the key settings** and additional **recommendations** to 
 |Blob Soft Delete|❌ Disabled (required for DFS endpoint)|
 |Networking|Open or Restricted (based on use)|
 
----
 
 Once you hit **Create**, your storage account will fully support:
 
@@ -77,5 +69,3 @@ Once you hit **Create**, your storage account will fully support:
 - `abfss://` Spark/Fabric paths
 - File/folder ACLs
 - Power BI and Fabric Lakehouse ingestion
-
----
