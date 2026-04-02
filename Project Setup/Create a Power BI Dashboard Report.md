@@ -1,6 +1,5 @@
 Absolutely. Creating the Power BI report is the "last mile" of the analytics journey, where data is transformed into actionable insights for the business. Simply showing the final report doesn't capture the thought process behind it. Let's create a comprehensive guide that explains not just _how_ to build the report, but _why_ specific visuals and techniques are used.
 
----
 
 ## A Deep Dive: Building an Executive Sales Dashboard in Power BI
 
@@ -17,7 +16,6 @@ A Power BI report is more than just a collection of charts; it's an interactive 
 
 Our goal is to create a dashboard that is not only visually appealing but also analytically powerful.
 
----
 
 ### Step 1: Prerequisites - A Solid Foundation
 
@@ -31,7 +29,6 @@ Before starting, ensure you have the following in your Fabric workspace:
     - **Relationships** connecting the tables (e.g., `Date[Date]` to `gold_daily_sales[transaction_date]`).
     - **DAX Measures** like `[Total Sales]` and `[Average Daily Sales]`, properly formatted as currency.
 
----
 
 ### Step 2: Launch the Power BI Report Editor
 
@@ -39,7 +36,6 @@ Before starting, ensure you have the following in your Fabric workspace:
 2. Navigate to your workspace and open the **semantic model** you created in the previous step (e.g., `Sales Analytics Model`).
 3. From the top ribbon of the semantic model view, click the **Create report** button. This will open the Power BI report editor with a live connection to your model.
 
----
 
 ### Step 3: Understand the Report Canvas
 
@@ -49,7 +45,6 @@ You are now in the Power BI editor. Let's briefly identify the key areas:
 - **Visualizations pane (Right):** Contains all the available chart types (bar, line, card, etc.).
 - **Canvas (Center):** The main area where you will build your report.
 
----
 
 ### Step 4: Building the Dashboard, Visual by Visual
 
@@ -107,7 +102,6 @@ We will now recreate the dashboard from your image, explaining the purpose of ea
 3. From the **Data** pane, drag `Date` > `Year` to the "Field" well.
 4. **Formatting Tip:** In the "Format your visual" pane, go to **Slicer settings > Style** and change it to **Dropdown** or **Tile** for a better user experience.
 
----
 
 ### Step 5: The Magic of Interactivity
 
@@ -118,7 +112,6 @@ Now, interact with your report to see the power of the semantic model at work.
 
 This cross-filtering is automatic because of the relationships you defined in the semantic model.
 
----
 
 ### Step 6: Save and Publish
 
