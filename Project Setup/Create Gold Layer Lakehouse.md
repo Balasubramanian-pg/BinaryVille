@@ -19,14 +19,12 @@ Think of our data journey like baking a cake:
 
 Creating the Gold Lakehouse is the first step in building this final, polished layer.
 
----
 
 ### Prerequisites
 
 - An active **Microsoft Fabric Workspace** with an assigned capacity.
 - Appropriate permissions within the workspace (e.g., **Admin**, **Member**, or **Contributor**) to create new artifacts.
 
----
 
 ### Step-by-Step Guide to Creating the Gold Lakehouse
 
