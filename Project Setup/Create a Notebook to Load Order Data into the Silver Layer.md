@@ -10,7 +10,6 @@ The `orders` table is the heart of most business analytics. It represents the ev
 - **Enriching with Business State:** Deriving an `order_status` adds immediate, actionable context to each transaction, allowing for analysis of order fulfillment, cancellations, and more.
 - **Maintaining an Idempotent, Incremental Pipeline:** We continue our best-practice pattern of creating a reliable and efficient process that can be run on a schedule without corrupting data or reprocessing redundant information.
 
----
 
 ### Step-by-Step Guide with Detailed Explanations
 
@@ -19,7 +18,6 @@ The `orders` table is the heart of most business analytics. It represents the ev
 - A **Bronze Lakehouse** (e.g., `LH_Bronze`) containing the raw `orders` table with an `ingestion_timestamp` column.
 - An existing **Silver Lakehouse** (e.g., `LH_Silver`).
 
----
 
 ### Step 1, 2, & 3: Navigate and Create the Notebook
 
@@ -29,7 +27,6 @@ The `orders` table is the heart of most business analytics. It represents the ev
     - Click **Open notebook > New notebook**.
     - Name it descriptively: `Ntbk_Bronze_to_Silver_Orders`.
 
----
 
 ### Notebook Implementation: A Cell-by-Cell Breakdown
 
@@ -64,7 +61,6 @@ spark.sql("""
     - `last_updated`: Our essential audit column for the incremental `MERGE` process.
 - `**USING DELTA**`: We explicitly create a Delta Lake table to enable transactional `MERGE` operations.
 
----
 
 ### Cell 2: Get the Last Processed Timestamp for Incremental Loading
 
@@ -88,7 +84,6 @@ print(f"Processing order data ingested after: {last_processed_timestamp}")
 
 - This cell follows the same robust `try...except` pattern. It finds the most recent `last_updated` timestamp from the `silver_orders` table. If it succeeds, it uses that timestamp as the starting point. If it fails for any reason (e.g., the table is empty on the first run), it gracefully defaults to a very old timestamp, ensuring all historical data is included in the initial load.
 
----
 
 ### Cell 3: Load New Data from the Bronze Layer
 
@@ -107,7 +102,6 @@ incremental_bronze_df.createOrReplaceTempView("bronze_incremental_orders_view")
 
 - This standard step reads the source `orders` table from the Bronze layer, filters it to isolate only the new records since the last run, and registers this filtered data as a temporary view (`bronze_incremental_orders_view`) for easy querying in the next step.
 
----
 
 ### Cell 4: Apply Transformations and Data Quality Rules
 
@@ -174,7 +168,6 @@ silver_incremental_df.createOrReplaceTempView("silver_incremental_orders_upserts
         - **Order Status Derivation**: We apply the `CASE` statement to derive the `order_status`. Note how this logic is now applied to the _clean_ `quantity` and `total_amount` columns. The logic has also been slightly simplified: if either quantity or amount is zero or less, we can consider the order `Cancelled` or invalid. Otherwise, it's `Completed`. This is a robust starting point.
         - `CURRENT_TIMESTAMP() AS last_updated`: We stamp each processed record with the current time, which will serve as the high-water mark for the next run.
 
----
 
 ### Cell 5: Merge Data into the Silver Layer (Upsert)
 
@@ -200,7 +193,6 @@ spark.sql("""
 
 - The `MERGE` statement efficiently handles the "upsert" logic. It uses the `order_id` to find matching records. If an order from the source already exists in the target (e.g., a data correction was sent), `WHEN MATCHED` updates the record. If the `order_id` is new, `WHEN NOT MATCHED` inserts it. This ensures our `silver_orders` table is always an accurate reflection of the latest information.
 
----
 
 ### Cell 6: Verify and Conclude
 
