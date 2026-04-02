@@ -89,7 +89,6 @@ Once the file upload is complete, verify that the customer data file is correctl
 
 ![[image 5 2.png|image 5 2.png]]
 
----
 
 ### Conclusion
 
