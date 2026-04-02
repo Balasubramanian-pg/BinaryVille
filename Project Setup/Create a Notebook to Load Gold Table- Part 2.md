@@ -8,14 +8,12 @@ The true power of a data platform is realized when you start connecting differen
 - **Creating a Denormalized View:** In the Silver layer, our data is normalized (product info is in one table, order info in another). For the Gold layer, we **denormalize** by pre-joining them. This is a deliberate choice to optimize for query performance. A Power BI report reading from this single, aggregated table is dramatically faster than one that has to perform a join on millions of rows every time a user interacts with it.
 - **Dimensional Modeling:** This is a foundational step in dimensional modeling. We are joining a "fact" table (`silver_orders`, which records events) with a "dimension" table (`silver_products`, which describes things) to create a summary.
 
----
 
 ### Prerequisites
 
 - A **Silver Lakehouse** (`LH_Silver`) containing the clean `silver_orders` and `silver_products` tables.
 - An **Gold Lakehouse** (`LH_Gold`) to store the final aggregated table.
 
----
 
 ### Step 1, 2, & 3: Navigate and Create the Notebook
 
@@ -25,7 +23,6 @@ The true power of a data platform is realized when you start connecting differen
     - Click **Open notebook > New notebook**.
     - Name it descriptively: `Ntbk_Gold_CategorySales_Summary`.
 
----
 
 ### Notebook Implementation
 
@@ -81,7 +78,6 @@ spark.sql("""
 
 - This query shows the aggregated results, ordered by total sales. This is a perfect way to quickly see your top-performing categories and validate that the logic is correct.
 
----
 
 ### Method 2: Best Practice - A Robust Full Refresh (and Why Incremental is Complex Here)
 
